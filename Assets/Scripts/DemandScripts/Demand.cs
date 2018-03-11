@@ -16,6 +16,8 @@ public abstract class Demand : MonoBehaviour
 	[SerializeField]
 	protected Color color = Color.white;
 
+	public event Action<DemandType> Overflowed;
+
 	protected float curLevel = 0f;
 	protected float curTime = 0f;
 
@@ -68,6 +70,11 @@ public abstract class Demand : MonoBehaviour
 	{
 		curTime += tick / timeScale;
 		curLevel = maxDemandValue * curve.Evaluate(curTime);
+
+		if(curLevel == maxDemandValue)
+		{
+			Overflowed(DemandType);
+		}
 	}
 
 	#endregion

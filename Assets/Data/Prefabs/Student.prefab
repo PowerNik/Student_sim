@@ -170,7 +170,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4915201033852880}
-  - component: {fileID: 114187435364021928}
   - component: {fileID: 114417463887947984}
   - component: {fileID: 114098844975694740}
   - component: {fileID: 114980566146726218}
@@ -193,6 +192,7 @@ GameObject:
   - component: {fileID: 95464080341392166}
   - component: {fileID: 195852490383586630}
   - component: {fileID: 114542774397863258}
+  - component: {fileID: 114603842962995210}
   m_Layer: 0
   m_Name: Student
   m_TagString: Untagged
@@ -1392,28 +1392,28 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 2
-      time: 0
-      value: -0.0030517578
+      time: 0.014389038
+      value: 0.073394775
       inSlope: 0
       outSlope: 0
       tangentMode: 0
     - serializedVersion: 2
-      time: 0.3021583
-      value: 0.030681245
-      inSlope: 0
+      time: 0.48202035
+      value: 0.26310042
+      inSlope: Infinity
       outSlope: Infinity
-      tangentMode: 97
+      tangentMode: 103
     - serializedVersion: 2
-      time: 0.6893115
-      value: 0.03401397
+      time: 0.6929126
+      value: 0.26643586
       inSlope: Infinity
       outSlope: 0.47858804
       tangentMode: 7
     - serializedVersion: 2
       time: 0.87079966
       value: 0.48567036
-      inSlope: 3.222938
-      outSlope: 3.222938
+      inSlope: 2.5948427
+      outSlope: 2.5948427
       tangentMode: 34
     - serializedVersion: 2
       time: 1
@@ -1427,20 +1427,6 @@ MonoBehaviour:
   maxDemandValue: 2
   timeScale: 16
   color: {r: 0, g: 0.751724, b: 1, a: 1}
---- !u!114 &114187435364021928
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1206752043679354}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 255477fa7039dde42aee0ee1dc6f2892, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  UIContainer: {fileID: 0}
-  sliderPrefab: {fileID: 224958063242107138, guid: 682240d5285653b42b8c66db0ef401a5,
-    type: 2}
 --- !u!114 &114274301399921758
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1494,16 +1480,16 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 2
-      time: 0.005393982
-      value: 0.030578613
+      time: 0
+      value: 0
       inSlope: 1
       outSlope: 1
       tangentMode: 0
     - serializedVersion: 2
-      time: 0.20476599
-      value: 0.034419693
+      time: 0.2
+      value: 0
       inSlope: Infinity
-      outSlope: 1.0000169
+      outSlope: 0
       tangentMode: 7
     - serializedVersion: 2
       time: 1
@@ -1514,7 +1500,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
-  maxDemandValue: 2
+  maxDemandValue: 1
   timeScale: 10
   color: {r: 0.6102941, g: 0.23990874, b: 0, a: 1}
 --- !u!114 &114542774397863258
@@ -1526,6 +1512,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 532a7c61e81c95d408d109d66cc4484f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114603842962995210
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1273817986121646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfbed77f37057ba4ea1129001c8ef6e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &114980566146726218
@@ -1549,17 +1546,29 @@ MonoBehaviour:
       outSlope: 0
       tangentMode: 0
     - serializedVersion: 2
-      time: 0.49731928
+      time: 0.30057245
       value: 0.14884819
       inSlope: Infinity
       outSlope: 0.7715076
       tangentMode: 7
     - serializedVersion: 2
+      time: 0.49917334
+      value: 0.38363653
+      inSlope: Infinity
+      outSlope: 1.5380979
+      tangentMode: 7
+    - serializedVersion: 2
+      time: 0.70068437
+      value: 0.73936987
+      inSlope: Infinity
+      outSlope: 0.87075347
+      tangentMode: 71
+    - serializedVersion: 2
       time: 1
       value: 1
-      inSlope: 2
+      inSlope: 0.87075347
       outSlope: 2
-      tangentMode: 0
+      tangentMode: 5
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
@@ -1662,14 +1671,14 @@ NavMeshAgent:
   m_GameObject: {fileID: 1273817986121646}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.13
-  m_Speed: 5
-  m_Acceleration: 5
+  m_Radius: 0.17
+  m_Speed: 10
+  m_Acceleration: 10
   avoidancePriority: 50
-  m_AngularSpeed: 100
+  m_AngularSpeed: 300
   m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
+  m_AutoBraking: 0
   m_AutoRepath: 1
   m_Height: 1
   m_BaseOffset: 0

@@ -4,41 +4,60 @@ using UnityEngine;
 
 public class DemandKeeper : MonoBehaviour
 {
-	private Dictionary<DemandType, List<DemandHolder>> demandDict = 
-		new Dictionary<DemandType, List<DemandHolder>>();
+	private Dictionary<string, DemandHolder> demandDict = 
+		new Dictionary<string, DemandHolder>();
 
-	public void AddDemand(DemandHolder demand, DemandType type)
+	private Dictionary<DemandType, int> demandCountDict =
+	new Dictionary<DemandType, int>();
+
+	public void RegisterDemand(DemandHolder demand, DemandType type)
 	{
-		if(!demandDict.ContainsKey(type))
+		if(!demandCountDict.ContainsKey(type))
 		{
-			demandDict[type] = new List<DemandHolder>();
+			demandCountDict[type] = 0;
 		}
 
-		demandDict[type].Add(demand);
+		string demandID = type.ToString() + "_" + demandCountDict[type];
+		demandDict[demandID] = demand;
+
+		demandCountDict[type]++;
 	}
 
-	public Transform GetNearestDemandHolder(Transform personPos, DemandType type)
+	public string GetNearestDemandHolder(Transform personPos, DemandType type)
 	{
 		float delta = 999999;
-		Transform demandTransform = personPos;
-		Transform temp;
+		string demandID = "";
 
-		for (int i = 0; i < demandDict[type].Count; i++)
+		foreach (var pair in demandDict)
 		{
-			temp = demandDict[type][i].Transform;
-			if ((temp.position - transform.position).sqrMagnitude < delta)
+			if(pair.Value.GetDemandType != type)
 			{
-				demandTransform = temp;
-				delta = (demandTransform.position - transform.position).sqrMagnitude;
+				continue;
+			}
+
+			float tempDelta = (pair.Value.GetTransform.position - personPos.position).sqrMagnitude;
+			if (tempDelta < delta)
+			{
+				delta = tempDelta;
+				demandID = pair.Key;
 			}
 		}
 
-		return demandTransform;
+		return demandID;
 	}
 
-	public float GetDemandResource(Transform demandHolder)
+	public Transform GetDemandTransform(string demandID)
 	{
-		return demandHolder.GetComponent<DemandHolder>().GetDemandResource();
+		return demandDict[demandID].GetTransform;
 	}
 
+	public float GetDemandResource(string demandID)
+	{
+		return demandDict[demandID].GetDemandResource;
+	}
+
+	public DemandType GetDemandType(string demandID)
+	{
+		return demandDict[demandID].GetDemandType;
+	}
 }

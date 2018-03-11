@@ -11,6 +11,8 @@ public class SliderActor : MonoBehaviour
 	private Image fillArea;
 	[SerializeField]
 	private Text title;
+	[SerializeField]
+	private Image background;
 
 	public void SetColor(Color color)
 	{
@@ -31,5 +33,21 @@ public class SliderActor : MonoBehaviour
 	public void SetText(string str)
 	{
 		title.text = str;
+	}
+
+	public void HighlightSlider(bool isActive)
+	{
+		if(isActive)
+		{
+			var col = background.color;
+			col.a = 255;
+			background.color = col;
+		}
+		else
+		{
+			var col = background.color;
+			col.a = 0;
+			background.color = col;
+		}
 	}
 }

@@ -24,20 +24,24 @@ public class DemandHolder : MonoBehaviour
 
 	void Start()
 	{
-		tr = GetComponent<Transform>();
-		GameObject.FindObjectOfType<DemandKeeper>().AddDemand(this, type);
-
 		GetComponent<TextShowner>().text = type.ToString();
+		tr = GetComponent<Transform>();
+		FindObjectOfType<DemandKeeper>().RegisterDemand(this, type);
 	}
 
-	public Transform Transform
+	public Transform GetTransform
 	{
 		get { return tr; }
 	}
 
-	public float GetDemandResource()
+	public DemandType GetDemandType
 	{
-		return demandResource;
+		get { return type; }
+	}
+
+	public float GetDemandResource
+	{
+		get { return demandResource; }
 	}
 }
 
