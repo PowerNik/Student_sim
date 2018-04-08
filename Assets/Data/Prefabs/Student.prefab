@@ -174,11 +174,11 @@ GameObject:
   - component: {fileID: 195852490383586630}
   - component: {fileID: 114542774397863258}
   - component: {fileID: 114603842962995210}
-  - component: {fileID: 114833736124229158}
   - component: {fileID: 114974387287115134}
   - component: {fileID: 114724936116696032}
   - component: {fileID: 114159217161026634}
   - component: {fileID: 114675262976660764}
+  - component: {fileID: 114833736124229158}
   m_Layer: 0
   m_Name: Student
   m_TagString: Untagged
@@ -1421,15 +1421,33 @@ MonoBehaviour:
     - serializedVersion: 2
       time: 0
       value: 0
-      inSlope: 0
+      inSlope: Infinity
       outSlope: 0
-      tangentMode: 0
+      tangentMode: 7
+    - serializedVersion: 2
+      time: 0.40616655
+      value: 0.22624974
+      inSlope: Infinity
+      outSlope: 1.3872981
+      tangentMode: 7
+    - serializedVersion: 2
+      time: 0.7
+      value: 0.4
+      inSlope: Infinity
+      outSlope: 0.026225474
+      tangentMode: 1
+    - serializedVersion: 2
+      time: 0.90142584
+      value: 0.59771997
+      inSlope: 2.4092197
+      outSlope: 2.4092197
+      tangentMode: 1
     - serializedVersion: 2
       time: 1
       value: 1
-      inSlope: 0
+      inSlope: 2
       outSlope: 0
-      tangentMode: 0
+      tangentMode: 1
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
@@ -1457,6 +1475,24 @@ MonoBehaviour:
       outSlope: 0
       tangentMode: 0
     - serializedVersion: 2
+      time: 0.3
+      value: 0.15
+      inSlope: Infinity
+      outSlope: 0.6793812
+      tangentMode: 7
+    - serializedVersion: 2
+      time: 0.5507
+      value: 0.3032595
+      inSlope: Infinity
+      outSlope: Infinity
+      tangentMode: 103
+    - serializedVersion: 2
+      time: 0.7
+      value: 0.75
+      inSlope: Infinity
+      outSlope: 0
+      tangentMode: 7
+    - serializedVersion: 2
       time: 1
       value: 1
       inSlope: 2
@@ -1466,7 +1502,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 0
   maxNeedValue: 1
-  timeScale: 10
+  timeScale: 20
   color: {r: 0.94482756, g: 1, b: 0, a: 1}
 --- !u!114 &114833736124229158
 MonoBehaviour:
@@ -1504,7 +1540,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 0
   maxNeedValue: 1
-  timeScale: 10
+  timeScale: 15
   color: {r: 0.7205882, g: 0.7205882, b: 0.7205882, a: 1}
 --- !u!114 &114974387287115134
 MonoBehaviour:
@@ -1526,6 +1562,12 @@ MonoBehaviour:
       inSlope: 1
       outSlope: 1
       tangentMode: 0
+    - serializedVersion: 2
+      time: 0.2
+      value: 0.15290518
+      inSlope: Infinity
+      outSlope: 0.9998679
+      tangentMode: 7
     - serializedVersion: 2
       time: 1
       value: 1
