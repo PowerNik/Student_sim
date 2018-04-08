@@ -5,14 +5,15 @@ using UnityEngine;
 
 public class TimeManager : MonoBehaviour
 {
+	[Range(0f, 1f)]
 	[SerializeField]
-	private float timeScale = 2;
+	private float timeSpeed = 0.2f;
 	private float sendedTickTime = 0;
 
 	public event Action<float> tickTack;
 
 	void Update ()
 	{
-		tickTack(Time.deltaTime / timeScale);
+		tickTack(Time.deltaTime * timeSpeed);
 	}
 }
