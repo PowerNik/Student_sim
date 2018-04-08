@@ -27,6 +27,8 @@ public class CatCrazyState : CatState
 	{
 		base.EnterState();
 
+		navMeshAgent.stoppingDistance = 1.0f;
+
 		navMeshAgent.speed *= speedScale;
 		navMeshAgent.acceleration *= speedScale;
 		navMeshAgent.angularSpeed *= speedScale;

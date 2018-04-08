@@ -7,6 +7,7 @@ public enum CatStateType { DoAction, Walk, Crazy }
 
 public class CatController : MonoBehaviour
 {
+	public bool IsCrazy = false;
 	public Transform student;
 	public Transform[] destinations;
 
@@ -46,7 +47,7 @@ public class CatController : MonoBehaviour
 	{
 		if(state == CatStateType.DoAction)
 		{
-			if (Random.Range(0f, 1f) < letsCrazyChance)
+			if (Random.Range(0f, 1f) < letsCrazyChance || IsCrazy == true)
 			{
 				currentState = catStateDict[CatStateType.Crazy];
 			}

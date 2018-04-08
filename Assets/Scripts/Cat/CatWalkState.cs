@@ -22,6 +22,7 @@ public class CatWalkState : CatState
 	public override void EnterState()
 	{
 		base.EnterState();
+		navMeshAgent.stoppingDistance = 1.5f;
 		ChooseDestination();
 	}
 

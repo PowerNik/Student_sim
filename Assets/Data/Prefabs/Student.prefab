@@ -1541,7 +1541,7 @@ MonoBehaviour:
     m_RotationOrder: 0
   maxNeedValue: 1
   timeScale: 15
-  color: {r: 0.7205882, g: 0.7205882, b: 0.7205882, a: 1}
+  color: {r: 0.63235295, g: 0.55282784, b: 0.3440744, a: 1}
 --- !u!114 &114974387287115134
 MonoBehaviour:
   m_ObjectHideFlags: 1

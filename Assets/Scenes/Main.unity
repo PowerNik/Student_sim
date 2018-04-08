@@ -919,6 +919,11 @@ Prefab:
       propertyPath: destinations.Array.data[9]
       value: 
       objectReference: {fileID: 245168086}
+    - target: {fileID: 195506624991187372, guid: 0258410e72529aa4a9c2da26a4baf0b4,
+        type: 2}
+      propertyPath: m_StoppingDistance
+      value: 1.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0258410e72529aa4a9c2da26a4baf0b4, type: 2}
   m_IsPrefabParent: 0
