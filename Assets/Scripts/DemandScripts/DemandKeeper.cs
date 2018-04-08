@@ -7,10 +7,10 @@ public class DemandKeeper : MonoBehaviour
 	private Dictionary<string, DemandHolder> demandDict = 
 		new Dictionary<string, DemandHolder>();
 
-	private Dictionary<DemandType, int> demandCountDict =
-	new Dictionary<DemandType, int>();
+	private Dictionary<NeedType, int> demandCountDict =
+	new Dictionary<NeedType, int>();
 
-	public void RegisterDemand(DemandHolder demand, DemandType type)
+	public void RegisterDemand(DemandHolder demand, NeedType type)
 	{
 		if(!demandCountDict.ContainsKey(type))
 		{
@@ -23,7 +23,7 @@ public class DemandKeeper : MonoBehaviour
 		demandCountDict[type]++;
 	}
 
-	public string GetNearestDemandHolder(Transform personPos, DemandType type)
+	public string GetNearestDemandHolder(Transform personPos, NeedType type)
 	{
 		float delta = 999999;
 		string demandID = "";
@@ -56,7 +56,7 @@ public class DemandKeeper : MonoBehaviour
 		return demandDict[demandID].GetDemandResource;
 	}
 
-	public DemandType GetDemandType(string demandID)
+	public NeedType GetDemandType(string demandID)
 	{
 		return demandDict[demandID].GetDemandType;
 	}

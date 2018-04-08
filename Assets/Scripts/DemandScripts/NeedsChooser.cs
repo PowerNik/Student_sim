@@ -2,51 +2,50 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public enum StrategyType { First, Second, Third }
 
-public class DemandChooser : MonoBehaviour
+public class NeedsChooser : MonoBehaviour
 {
 	public StrategyType strategy;
 
 	private DemandKeeper demandKeeper;
-	private DemandUIManager UIManager;
+	private NeedsUIManager UIManager;
 	private Person person;
 
-	private List<Demand> demands = new List<Demand>();
-	private Demand currentDemand = null;
+	private List<Need> needs = new List<Need>();
+	private Need currentNeed = null;
 
 	private void Start()
 	{
 		GetComponents();
 		SubscribeToComponents();
 
-		UIManager.CreateSliders(demands.ToArray());
+		UIManager.CreateSliders(needs.ToArray());
 	}
 
 	private void GetComponents()
 	{
 		person = FindObjectOfType<Person>();
-		demands.AddRange(FindObjectsOfType<Demand>());
+		needs.AddRange(GetComponents<Need>());
 
 		demandKeeper = FindObjectOfType<DemandKeeper>();
-		UIManager = FindObjectOfType<DemandUIManager>();
+		UIManager = FindObjectOfType<NeedsUIManager>();
 	}
 
 	private void SubscribeToComponents()
 	{
-		person.needTarget += OnPersonNeedDemandHolder;
+		person.chooseNextNeed += OnPersonNeedDemandHolder;
 		person.reachedTarget += OnPersonReachedDemandHolder;
 
 		FindObjectOfType<TimeManager>().tickTack += UpdateDemandsTime;
 
-		foreach(var demand in demands)
+		foreach(var demand in needs)
 		{
 			demand.Overflowed += OnDemandOverflowed;
 		}
 	}
 
-	private void OnDemandOverflowed(DemandType type)
+	private void OnDemandOverflowed(NeedType type)
 	{
 		/*foreach(var demand in demands)
 		{
@@ -62,20 +61,20 @@ public class DemandChooser : MonoBehaviour
 
 	private void UpdateDemandsTime(float tick)
 	{
-		foreach (var item in demands)
+		foreach (var item in needs)
 		{
 			item.TickTime(tick);
-			UIManager.SetDemandValue(item.DemandType, item.GetRelativeLevel());
+			UIManager.SetNeedValue(item.NeedType, item.GetRelativeLevel());
 		}
 	}
 
 	private void OnPersonReachedDemandHolder(string targetID)
 	{
 		float resource = demandKeeper.GetDemandResource(targetID);
-		currentDemand.SatisfyDemand(resource, currentDemand.DemandType);
+		currentNeed.SatisfyNeed(resource, currentNeed.NeedType);
 
-		UIManager.SetDemandValue(currentDemand.DemandType, currentDemand.GetRelativeLevel());
-		UIManager.HighlightOff(currentDemand.DemandType);
+		UIManager.SetNeedValue(currentNeed.NeedType, currentNeed.GetRelativeLevel());
+		UIManager.HighlightOff(currentNeed.NeedType);
 	}
 
 	private void OnPersonNeedDemandHolder()
@@ -83,20 +82,20 @@ public class DemandChooser : MonoBehaviour
 		switch(strategy)
 		{
 			case StrategyType.First:
-				currentDemand = GetHighestDemand();
+				currentNeed = GetHighestDemand();
 				break;
 
 			case StrategyType.Second:
-				currentDemand = GetDemandByPriority();
+				currentNeed = GetDemandByPriority();
 				break;
 		}
 		SetTargetForPerson();
 	}
 
-	private Demand GetHighestDemand()
+	private Need GetHighestDemand()
 	{
-		Demand highestDemand = null;
-		foreach (var demand in demands)
+		Need highestDemand = null;
+		foreach (var demand in needs)
 		{
 			if (highestDemand == null)
 			{
@@ -112,33 +111,33 @@ public class DemandChooser : MonoBehaviour
 		return highestDemand;
 	}
 
-	private Demand GetDemandByPriority()
+	private Need GetDemandByPriority()
 	{
-		var food = demands.Find((x) => x.DemandType == DemandType.Food);
+		var food = needs.Find((x) => x.NeedType == NeedType.Food);
 		if (food.GetRelativeLevel() > 0.5f)
 		{
 			return food;
 		}
 
-		var sleep = demands.Find((x) => x.DemandType == DemandType.Sleep);
+		var sleep = needs.Find((x) => x.NeedType == NeedType.Sleep);
 		if (sleep.GetRelativeLevel() > 0.5f)
 		{
 			return sleep;
 		}
 
-		var cat = demands.Find((x) => x.DemandType == DemandType.Cat);
+		var cat = needs.Find((x) => x.NeedType == NeedType.Cat);
 		if (cat.GetRelativeLevel() > 0.5f)
 		{
 			return cat;
 		}
 
-		var relax = demands.Find((x) => x.DemandType == DemandType.Relax);
+		var relax = needs.Find((x) => x.NeedType == NeedType.Relax);
 		if (relax.GetRelativeLevel() > 0.5f)
 		{
 			return relax;
 		}
 
-		var learn = demands.Find((x) => x.DemandType == DemandType.Learn);
+		var learn = needs.Find((x) => x.NeedType == NeedType.Learn);
 		return learn;
 	}
 
@@ -147,10 +146,10 @@ public class DemandChooser : MonoBehaviour
 		string targetID = demandKeeper.GetNearestDemandHolder
 		(
 			person.transform,
-			currentDemand.DemandType
+			currentNeed.NeedType
 		);
 		person.SetTarget(demandKeeper.GetDemandTransform(targetID), targetID);
 
-		UIManager.HighlightOn(currentDemand.DemandType);
+		UIManager.HighlightOn(currentNeed.NeedType);
 	}
 }

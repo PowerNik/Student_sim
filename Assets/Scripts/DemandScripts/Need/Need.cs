@@ -3,37 +3,37 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Demand : MonoBehaviour
+public abstract class Need : MonoBehaviour
 {
 	#region Fields
 
 	[SerializeField]
 	protected AnimationCurve curve;
 	[SerializeField]
-	protected float maxDemandValue = 10f;
+	protected float maxNeedValue = 10f;
 	[SerializeField]
 	protected float timeScale = 10f;
 	[SerializeField]
 	protected Color color = Color.white;
 
-	public event Action<DemandType> Overflowed;
+	public event Action<NeedType> Overflowed;
 
 	protected float curLevel = 0f;
 	protected float curTime = 0f;
 
 	protected float[] reverseValuesMas;
 	protected int timeStepCount = 21;
-	protected DemandType demandType = DemandType.Food;
+	protected NeedType needType = NeedType.Food;
 
 	#endregion
 
 	#region IDemand
 
-	public DemandType DemandType
+	public NeedType NeedType
 	{
 		get
 		{
-			return demandType;
+			return needType;
 		}
 	}
 
@@ -49,15 +49,15 @@ public abstract class Demand : MonoBehaviour
 
 	public float GetRelativeLevel()
 	{
-		return curLevel / maxDemandValue;
+		return curLevel / maxNeedValue;
 	}
 
-	public virtual void SatisfyDemand(float value, DemandType type)
+	public virtual void SatisfyNeed(float value, NeedType type)
 	{
 		if (curLevel > value)
 		{
 			curLevel -= value;
-			curTime = GetTimeFromDemandCurve(curLevel);
+			curTime = GetTimeFromNeedCurve(curLevel);
 		}
 		else
 		{
@@ -69,11 +69,11 @@ public abstract class Demand : MonoBehaviour
 	public virtual void TickTime(float tick)
 	{
 		curTime += tick / timeScale;
-		curLevel = maxDemandValue * curve.Evaluate(curTime);
+		curLevel = maxNeedValue * curve.Evaluate(curTime);
 
-		if(curLevel == maxDemandValue)
+		if(curLevel == maxNeedValue)
 		{
-			Overflowed(DemandType);
+			Overflowed(NeedType);
 		}
 	}
 
@@ -95,9 +95,9 @@ public abstract class Demand : MonoBehaviour
 		}
 	}
 
-	protected float GetTimeFromDemandCurve(float value)
+	protected float GetTimeFromNeedCurve(float value)
 	{
-		value /= maxDemandValue;
+		value /= maxNeedValue;
 
 		if(value <= 0)
 		{

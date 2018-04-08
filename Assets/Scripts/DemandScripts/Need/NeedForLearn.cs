@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RelaxDemand : Demand
+public class NeedForLearn : Need
 {
-	private void Awake()
+	void Awake()
 	{
-		demandType = DemandType.Relax;
+		needType = NeedType.Learn;
 	}
 }

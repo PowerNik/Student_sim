@@ -6,7 +6,7 @@ using UnityEngine.AI;
 
 public class Person : MonoBehaviour
 {
-	public event Action needTarget;
+	public event Action chooseNextNeed;
 	public event Action<string> reachedTarget;
 
 	private Animator animator;
@@ -58,7 +58,7 @@ public class Person : MonoBehaviour
 	private IEnumerator NeedNewTarget()
 	{
 		yield return new WaitForSeconds(switchTargetDelay);
-		needTarget();
+		chooseNextNeed();
 	}
 
 	public void SetTarget(Transform target, string targetID)

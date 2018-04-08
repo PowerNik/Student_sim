@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum DemandType
+public enum NeedType
 {
 	Food,
 	Sleep,
@@ -14,7 +14,7 @@ public enum DemandType
 public class DemandHolder : MonoBehaviour
 {
 	[SerializeField]
-	private DemandType type = DemandType.Food;
+	private NeedType type = NeedType.Food;
 
 	[SerializeField]
 	[Range(0.1f, 10)]
@@ -34,7 +34,7 @@ public class DemandHolder : MonoBehaviour
 		get { return tr; }
 	}
 
-	public DemandType GetDemandType
+	public NeedType GetDemandType
 	{
 		get { return type; }
 	}
