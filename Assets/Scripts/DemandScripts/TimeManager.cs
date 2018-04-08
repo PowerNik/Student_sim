@@ -11,8 +11,6 @@ public class TimeManager : MonoBehaviour
 
 	public event Action<float> tickTack;
 
-
-	// Update is called once per frame
 	void Update ()
 	{
 		tickTack(Time.deltaTime / timeScale);

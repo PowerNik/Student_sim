@@ -18,7 +18,6 @@ public class DemandUIManager : MonoBehaviour
 		sliderDict = new Dictionary<DemandType, SliderActor>();
 
 		float deltaY = sliderPrefab.GetComponent<RectTransform>().sizeDelta.y;
-
 		var offset = sliderPrefab.GetComponent<RectTransform>().sizeDelta;
 		offset.y = deltaY * demands.Length;
 		UIContainer.sizeDelta = offset;
@@ -43,7 +42,7 @@ public class DemandUIManager : MonoBehaviour
 		sliderDict[type].SetCurrentValues(value);
 	}
 
-	public void Highlight(DemandType type)
+	public void HighlightOn(DemandType type)
 	{
 		highlightedDemandType = type;
 		sliderDict[highlightedDemandType].HighlightSlider(true);

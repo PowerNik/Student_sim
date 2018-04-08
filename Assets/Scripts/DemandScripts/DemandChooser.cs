@@ -2,13 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+public enum StrategyType { First, Second, Third }
+
 public class DemandChooser : MonoBehaviour
 {
+	public StrategyType strategy;
+
 	private DemandKeeper demandKeeper;
 	private DemandUIManager UIManager;
 	private Person person;
 
-	private Demand[] demands;
+	private List<Demand> demands = new List<Demand>();
 	private Demand currentDemand = null;
 
 	private void Start()
@@ -16,13 +21,14 @@ public class DemandChooser : MonoBehaviour
 		GetComponents();
 		SubscribeToComponents();
 
-		UIManager.CreateSliders(demands);
+		UIManager.CreateSliders(demands.ToArray());
 	}
 
 	private void GetComponents()
 	{
 		person = FindObjectOfType<Person>();
-		demands = FindObjectsOfType<Demand>();
+		demands.AddRange(FindObjectsOfType<Demand>());
+
 		demandKeeper = FindObjectOfType<DemandKeeper>();
 		UIManager = FindObjectOfType<DemandUIManager>();
 	}
@@ -63,6 +69,30 @@ public class DemandChooser : MonoBehaviour
 		}
 	}
 
+	private void OnPersonReachedDemandHolder(string targetID)
+	{
+		float resource = demandKeeper.GetDemandResource(targetID);
+		currentDemand.SatisfyDemand(resource, currentDemand.DemandType);
+
+		UIManager.SetDemandValue(currentDemand.DemandType, currentDemand.GetRelativeLevel());
+		UIManager.HighlightOff(currentDemand.DemandType);
+	}
+
+	private void OnPersonNeedDemandHolder()
+	{
+		switch(strategy)
+		{
+			case StrategyType.First:
+				currentDemand = GetHighestDemand();
+				break;
+
+			case StrategyType.Second:
+				currentDemand = GetDemandByPriority();
+				break;
+		}
+		SetTargetForPerson();
+	}
+
 	private Demand GetHighestDemand()
 	{
 		Demand highestDemand = null;
@@ -82,19 +112,34 @@ public class DemandChooser : MonoBehaviour
 		return highestDemand;
 	}
 
-	private void OnPersonReachedDemandHolder(string targetID)
+	private Demand GetDemandByPriority()
 	{
-		float resource = demandKeeper.GetDemandResource(targetID);
-		currentDemand.SatisfyDemand(resource, currentDemand.DemandType);
+		var food = demands.Find((x) => x.DemandType == DemandType.Food);
+		if (food.GetRelativeLevel() > 0.5f)
+		{
+			return food;
+		}
 
-		UIManager.SetDemandValue(currentDemand.DemandType, currentDemand.GetRelativeLevel());
-		UIManager.HighlightOff(currentDemand.DemandType);
-	}
+		var sleep = demands.Find((x) => x.DemandType == DemandType.Sleep);
+		if (sleep.GetRelativeLevel() > 0.5f)
+		{
+			return sleep;
+		}
 
-	private void OnPersonNeedDemandHolder()
-	{
-		currentDemand = GetHighestDemand();
-		SetTargetForPerson();
+		var cat = demands.Find((x) => x.DemandType == DemandType.Cat);
+		if (cat.GetRelativeLevel() > 0.5f)
+		{
+			return cat;
+		}
+
+		var relax = demands.Find((x) => x.DemandType == DemandType.Relax);
+		if (relax.GetRelativeLevel() > 0.5f)
+		{
+			return relax;
+		}
+
+		var learn = demands.Find((x) => x.DemandType == DemandType.Learn);
+		return learn;
 	}
 
 	private void SetTargetForPerson()
@@ -106,6 +151,6 @@ public class DemandChooser : MonoBehaviour
 		);
 		person.SetTarget(demandKeeper.GetDemandTransform(targetID), targetID);
 
-		UIManager.Highlight(currentDemand.DemandType);
+		UIManager.HighlightOn(currentDemand.DemandType);
 	}
 }
